@@ -18,18 +18,20 @@ const records = parse(csvData, {
 test.describe.configure({ mode: 'serial' });
 
 records.forEach((user: any) => {
-  test(`OQTF - ${user.IdentifiantAgentQualif}`, async ({ page }) => {
+  test(`${user.NumeroEtranger} - ${user.TypeMesure}`, async ({ page }) => {
     test.setTimeout(180_000);
     const client = await page.context().newCDPSession(page);
     await client.send('Performance.enable');
 
-    await LancerURL(page, 'https://qualification.siaef.dgef.interieur.gouv.fr/aeffenv68/sejour/#/accueil');
+    await LancerURL(page, 'https://qualification.siaef.dgef.interieur.gouv.fr/aeffenv68/#/accueil');
     await expect(page).toHaveTitle(/Étrangers en France/);
 
     await login(page, 'test.gpe+agent12@outlook.fr', 'Natali12345!');
     await page.locator('xpath=//span[text()=" ANEF éloignement "]').click();
     // attendre que le boutton rechercher dossier soit voisible 
     await page.locator('xpath=//button[@title="Rechercher un dossier"]').waitFor({ state: 'visible', timeout: 10000 });
+    //refresh la page
+    await page.reload();
     //verifier que la banette "Nouveaux dossiers à traiter" est invisible
     await expect(page.locator('xpath=//a[contains(text(),"Nouveaux dossiers à traiter")]')).toBeHidden();
     //verifier que la banette " Suivi des transferts de dossier" est invisible
@@ -63,7 +65,31 @@ records.forEach((user: any) => {
     //verifier que la banette "Départs programmés" est visible
     await expect(page.locator('xpath=//a[contains(text(),"Départs programmés")]')).toBeVisible();
     // Jira EL-1031
+    //Verifier que le dossier Etranger existe dans le tableau "Instruction en cours" > "COMEX"
 
+    //Cliquer sur la sous-bannette comex
+    await page.locator('xpath=//a[contains(text(),"COMEX")]').click();
+    //Saisir le numéro étranger
+    await page.locator('xpath=(//input[@name="identifiant_agdref"])[1]').fill(user.NumeroEtranger);
+    //Cliquer sur le bouton "Lancer la recherche"
+    await page.locator('xpath=//button[@id="btn-appliquer-filtres-search-bannette"]').click();
+    if ( user.typeMesure === 'Expulsion' && user.AjouterNotification === 'Non' && user.UrgenceAbsolue === 'Non' ) {
+    //Vérifier que le dossier Etranger créé existe dans le tableau "Instruction en cours" > "COMEX"
+    await expect(page.locator(`//table//tbody//tr[td[contains(text(),"${user.NumeroEtranger}")]]`)).toHaveCount(1);
+    }
+    else {
+      //Vérifier que le dossier Etranger créé n'existe pas dans le tableau "Instruction en cours" > "COMEX"
+      await expect(page.locator(`//table//tbody//tr[td[contains(text(),"${user.NumeroEtranger}")]]`)).toHaveCount(0);
+    }
+
+    if( user.typeMesure === 'Expulsion' && (user.AjouterNotification=== "Non" && user.AjouterDecision === 'Oui') ) {
+  // cliquer sur la bannette Mesures en attente de notification
+  await page.locator('xpath=//a[contains(text(),"Mesures en attente de notification")]').click();
+  //Saisir le numéro étranger
+  await page.locator('xpath=(//input[@name="identifiant_agdref"])[1]').fill(user.NumeroEtranger);
+  //Cliquer sur le bouton "Lancer la recherche"
+  await page.locator('xpath=//button[@id="btn-appliquer-filtres-search-bannette"]').click();
+    }
     
   });
 });

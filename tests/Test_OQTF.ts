@@ -17,11 +17,14 @@ columns: true,
 skip_empty_lines: true  
 }); 
 test.describe.configure({ mode: 'serial' });
-records.forEach((user : any) => {
+
+for (const user of records) {
+  test(`OQTF - ${user.IdentifiantAgentQualif}`, async ({ page }) => {
+  
 /**
  *   Créer d'un nouveau Dossier usager avec entrée Data
  */
-test('OQTF', async ({ page }) => {
+
   test.setTimeout(180_000);
   const client = await page.context().newCDPSession(page);
   await client.send('Performance.enable');
@@ -58,12 +61,10 @@ if (lignes.length > 1) {
   
 // remplir le formulaire Mesure
   // Fondement légal *
-await FormulaireMesure(page, user.FondementLegal , user.NatureDeLacteExpulsion,user.UrgenceAbsolue);
+await FormulaireMesure(page, user.FondementLegal , user.NatureDeLacteExpulsion,user.UrgenceAbsolue, user.TypeMesure);
 
 // Prendre une décision et notification
-await PrendreDecisionEtNotification(page);
+await PrendreDecisionEtNotification(page, user, user.AjouterDecision, user.AjouterNotification);
   
  
-
   });
-});

@@ -7,8 +7,10 @@ export async function RechercherDossier(page: Page) {
    //génération d'un numéro aléatoire à 9 chiffres
    const numeroAleatoire = Math.floor(100000000 + Math.random() * 900000000);
 
-  // Recherche Dossier Inexistant
   await page.waitForTimeout(7000); // attend 7 secondes  
+  //refresh la page
+  await page.reload();
+  //clic sur le bouton rechercher dossier
   await page.locator('xpath=//button[text()=" Rechercher un dossier "]').click();
   //Numéro AGDREF
   await page.locator('xpath=//input[@id="identifiant_agdref"]').fill(String(numeroAleatoire));
