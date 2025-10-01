@@ -25,4 +25,5 @@ export async function RechercherDossier(page: Page) {
   //await page.locator('xpath=//*[@id="annee"]').fill(yearNaissance);
   // btn Lancer la Recherche 
   await page.locator('xpath=//button [text()=" Lancer la recherche "]').click();   
+
 }
