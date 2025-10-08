@@ -10,6 +10,7 @@ export async function RechercherDossier(page: Page) {
   await page.waitForTimeout(7000); // attend 7 secondes  
   //refresh la page
   await page.reload();
+  await page.reload();
   //clic sur le bouton rechercher dossier
   await page.locator('xpath=//button[text()=" Rechercher un dossier "]').click();
   //Numéro AGDREF

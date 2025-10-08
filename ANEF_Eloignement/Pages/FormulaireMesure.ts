@@ -14,6 +14,21 @@ import path from 'path/win32';
 
   await page.locator('xpath=//select[@id="fondement_legal"]').selectOption(FondementLegal);
  }
+ if (TypeMesure =="OQTF"){
+  // renseigner delai de depart volontaire
+  await page.locator('xpath=//input[@id="nbr_jours"]').fill("12");
+  //cliquer sur le boutton obligation fixée par prefet
+  await page.locator('xpath=//*[@id="ACCORDEON_DELAI_DEPART_VOLONTAIRE"]/form//app-dsfr-radio/div/fieldset//label[contains(text(),"Oui")]').click();
+  // enregistrer l'OQTF
+    await page.locator('xpath=//button[contains(text(),"Enregistrer")]').click();
+  //attendre 3 secondes
+  await page.waitForTimeout(3000);
+    // selectionner un fondement legal IRTF
+  await page.waitForSelector('xpath=//app-accordeon-ictf-irtf/section/div/form//app-dsfr-select-arr/div/select[@name="fondement_legal"]', { state: 'visible' });
+  await page.locator('xpath=//app-accordeon-ictf-irtf/section/div/form//app-dsfr-select-arr/div/select[@name="fondement_legal"]').selectOption( {index: 1});
+  //durée de l'IRTF
+  await page.locator('xpath=//input[@id="nbr_mois_duree_init"]').fill("6");
+}
   if (TypeMesure =="Expulsion"){
 
 // Nature de l'acte d'expulsion *
@@ -73,6 +88,7 @@ import path from 'path/win32';
     // Ajouter un fichier preuve de notification
     await page.setInputFiles('//section/div/form//app-dsfr-piece-jointe//input', filePath);
     await page.locator('xpath=//button[contains(text(),"Enregistrer")]').click();
+    await page.waitForTimeout(3000);
     //attendre que le boutton soit cliquable
     await page.waitForSelector('xpath=//button[@id="saveButtonIAT" and not(@disabled)]', { state: 'visible' });
     // valider et enregistrer l'IAT 

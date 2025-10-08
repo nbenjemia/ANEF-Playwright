@@ -1,9 +1,9 @@
 NumeroEtranger,IdentifiantAgentQualif,PwAgentQualif,RefuserDepartVolontaire,TypeMesure,FondementLegal,NatureDeLacteExpulsion,UrgenceAbsolue,AjouterNotification,AjouterDecision
- 7503185202 ,test.gpe+agent12@outlook.fr,Natali12345!,false,Expulsion,L.631-1,AME,Non,Non,Non
- 7503185201 ,test.gpe+970@outlook.fr,Testing12345!,false,Expulsion,L.631-2,APE,Oui,Non,Non
- 7503185200 ,test.gpe+970@outlook.fr,Testing12345!,false,Expulsion,L.631-1,AME,Non,Oui,Oui
- 7503185199 ,test.gpe+970@outlook.fr,Testing12345!,false,Expulsion,L.631-2,APE,Oui,Oui,Oui
- 7503185198 ,test.gpe+970@outlook.fr,Testing12345!,false,IAT,L.321-1,AME,Non,Non,Non
- 7503185193 ,test.gpe+970@outlook.fr,Testing12345!,false,ITF,L.321-1,AME,Non,Non,Non
- 7503185205 ,test.gpe+agent12@outlook.fr,Natali12345!,false,Expulsion,L.631-1,AME,Non,Non,Oui
- 750318519 ,test.gpe+970@outlook.fr,Testing12345!,false,Expulsion,L.631-1,APE,Non,Non,Oui
+ 7503185277 ,test.gpe+agent12@outlook.fr,Natali12345!,false,Expulsion,L.631-1,AME,Non,Non,Non
+ 7503185279 ,test.gpe+agent12@outlook.fr,Natali12345!,false,Expulsion,L.631-2,APE,Oui,Non,Non
+ 7503185282 ,test.gpe+agent12@outlook.fr,Natali12345!,false,Expulsion,L.631-1,AME,Non,Oui,Oui
+ 7503185283 ,test.gpe+agent12@outlook.fr,Natali12345!,false,Expulsion,L.631-2,APE,Oui,Oui,Oui
+ 7503185290 ,test.gpe+agent12@outlook.fr,Natali12345!,false,IAT,L.321-1,AME,Non,Non,Non
+ 7503185287 ,test.gpe+agent12@outlook.fr,Natali12345!,false,ITF,L.321-1,AME,Non,Non,Non
+ 7503185288 ,test.gpe+agent12@outlook.fr,Natali12345!,false,Expulsion,L.631-1,AME,Non,Non,Oui
+ 7503185289 ,test.gpe+agent12@outlook.fr,Natali12345!,false,Expulsion,L.631-1,APE,Non,Non,Oui

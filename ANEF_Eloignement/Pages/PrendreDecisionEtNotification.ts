@@ -6,16 +6,16 @@ const filePath = path.join(__dirname, '..', '..', 'Data Files', 'AjoutDecision.p
      {
       if(AjouterDecision === 'Oui') {
       // Attendre que le bouton "Prendre une décision" soit visible
-      await page.waitForSelector('xpath=//button[@aria-label="Ajouter une decision"]', { state: 'visible' });
-      await page.locator('xpath=//button[@aria-label="Ajouter une decision"]').click();
+      await page.waitForSelector('xpath=//button[contains(text(),"Ajouter une décision")]', { state: 'visible' });
+      await page.locator('xpath=//button[contains(text(),"Ajouter une décision")]').click();
         // Confirmer l'ajout
-        await page.waitForSelector('xpath=//button[@aria-label="Confirmer Ajout Decision"]', { state: 'visible' });
-        await page.locator('xpath=//button[@aria-label="Confirmer Ajout Decision"]').click();
+        await page.waitForSelector('xpath=//button[contains(text(),"Confirmer l\'ajout")]', { state: 'visible' });
+        await page.locator('xpath=//button[contains(text(),"Confirmer l\'ajout")]').click();
       } 
       if(AjouterNotification === 'Oui') {   
       // Attendre que le bouton "Notifier l'usager" soit visible
-      await page.waitForSelector('xpath=//button[@aria-label="Confirmer la notification"]', { state: 'visible' });
-      await page.locator('xpath=//button[@aria-label="Confirmer la notification"]').click();
+      await page.waitForSelector('xpath=//button[contains(text(),"Confirmer la notification")]', { state: 'visible' });
+      await page.locator('xpath=//button[contains(text(),"Confirmer la notification")]').click();
         // Sélectionner le mode de notification
         await page.waitForSelector('xpath=//select[@id="mode_notification"]', { state: 'visible' });
         await page.locator('xpath=//select[@id="mode_notification"]').selectOption('Voie postale');
@@ -26,7 +26,7 @@ const filePath = path.join(__dirname, '..', '..', 'Data Files', 'AjoutDecision.p
                 // Sélectionne l'input file et upload le fichier
         await page.setInputFiles('//app-notification-modal//form//app-dsfr-piece-jointe//input',filePath);
         // Cliquer sur le bouton "Ajouter la notification"
-        await page.locator('xpath=//button[@aria-label="Ajouter Notification"]').click();
+        await page.locator('xpath=//app-notification-modal//button[contains(text(),"Confirmer la notification")]|//app-notification-modal//button[contains(text(),"Confirmer l\'ajout")]').click();
         
     } 
     }

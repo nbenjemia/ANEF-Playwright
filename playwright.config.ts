@@ -1,4 +1,9 @@
 import { devices, PlaywrightTestConfig } from '@playwright/test';
+
+// playwright.config.ts
+import { defineConfig } from '@playwright/test';
+
+
 const config: PlaywrightTestConfig = {
   projects: [
               {
@@ -9,7 +14,7 @@ const config: PlaywrightTestConfig = {
              
               }
             ],
-  testMatch:["tests/Test_OQTF.ts"],
+  testMatch:["tests/**/*.spec.ts"],
   // ["tests/Test_OQTF.ts"],["tests/SejourE2E.ts"]
   use : {
           headless : false,
@@ -20,7 +25,10 @@ const config: PlaywrightTestConfig = {
                           },
         },
 timeout : 60 * 1000 * 5,
-retries : 0
+retries : 0,
+workers : 9
 };
 
 export default config;
+
+
